@@ -137,9 +137,11 @@
   gap: 8px;
   align-items: center;
   margin-top: auto;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
-.quantity-selector button {
+.quantity-selector button:not(.btn-confirm) {
   width: 30px;
   height: 30px;
   border: 1px solid #ddd;
@@ -149,15 +151,17 @@
   font-weight: 600;
   color: #667eea;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 
-.quantity-selector button:hover {
+.quantity-selector button:not(.btn-confirm):hover {
   background: #667eea;
   color: white;
 }
 
 .quantity-selector input {
   flex: 1;
+  min-width: 50px;
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -169,10 +173,14 @@
   background: #27ae60;
   color: white;
   flex: 1;
+  min-width: 100px;
   padding: 8px;
   border-radius: 4px;
   font-weight: 500;
   font-size: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .btn-confirm:hover {

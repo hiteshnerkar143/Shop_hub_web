@@ -30,6 +30,41 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+.checkout-form .form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-form .form-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.checkout-form .form-group input,
+.checkout-form .form-group textarea,
+.checkout-form .form-group select {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: white;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.checkout-form .form-group input::placeholder {
+  color: #999;
+}
+
+.checkout-form .form-group input:focus,
+.checkout-form .form-group textarea:focus,
+.checkout-form .form-group select:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
 fieldset {
   margin-bottom: 30px;
   border: none;
@@ -62,6 +97,22 @@ legend {
   margin-bottom: 20px;
   font-size: 14px;
   font-weight: 500;
+}
+
+.payment-info {
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  color: #1565c0;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.payment-info p {
+  margin: 8px 0;
+  color: #1565c0;
 }
 
 .btn-checkout {

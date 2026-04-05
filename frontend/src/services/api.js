@@ -45,4 +45,9 @@ export const cartAPI = {
   clearCart: () => API.post("/cart/clear"),
 };
 
+// Payment APIs (Demo/Fake)
+export const paymentAPI = {
+  processPayment: (data) => API.post("/payment/process-payment", data),
+};
+
 export default API;

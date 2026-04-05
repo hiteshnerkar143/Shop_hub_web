@@ -54,9 +54,9 @@ const VerifySignupOTP = () => {
         otp,
       });
 
-      setSuccess("Email verified successfully! Redirecting to login...");
+      setSuccess("Email verified successfully! Redirecting to home...");
       setTimeout(() => {
-        navigate("/login");
+        navigate("/");
       }, 1500);
     } catch (err) {
       setError(err.response?.data?.message || "OTP verification failed");

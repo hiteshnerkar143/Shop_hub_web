@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { paymentAPI } from "../services/api";
 import "./Checkout.css";
 
 const Checkout = () => {
@@ -16,9 +17,6 @@ const Checkout = () => {
     city: "",
     state: "",
     zipCode: "",
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -58,14 +56,25 @@ const Checkout = () => {
         return;
       }
 
-      // Simulate payment processing
-      setTimeout(() => {
-        alert("✅ Payment Processing...\n\n💳 Order Placed Successfully!\n\nOrder ID: #SH" + Math.floor(Math.random() * 1000000));
+      // Process fake payment
+      const response = await paymentAPI.processPayment({
+        items: cart.items,
+        totalPrice: totalAmount / 1.05,
+        shippingInfo: formData,
+      });
+
+      if (response.data.success) {
+        alert(
+          "✅ Payment Successful!\n\n💳 Order Placed Successfully!\n\nOrder ID: #" +
+            response.data.orderId
+        );
         navigate("/");
         localStorage.removeItem("cart");
-      }, 2000);
+      } else {
+        setError("Payment failed. Please try again.");
+      }
     } catch (err) {
-      setError("Checkout failed. Please try again.");
+      setError(err.response?.data?.message || "Checkout failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -179,47 +188,11 @@ const Checkout = () => {
             </fieldset>
 
             <fieldset>
-              <legend>Payment Information</legend>
+              <legend>Payment Method</legend>
 
-              <div className="payment-warning">
-                ⚠️ Demo Mode: This is a demonstration. Use any card details.
-              </div>
-
-              <div className="form-group">
-                <label>Card Number *</label>
-                <input
-                  type="text"
-                  name="cardNumber"
-                  value={formData.cardNumber}
-                  onChange={handleChange}
-                  placeholder="1234 5678 9012 3456"
-                  required
-                />
-              </div>
-
-              <div className="form-row">
-                <div className="form-group">
-                  <label>Expiry Date *</label>
-                  <input
-                    type="text"
-                    name="expiryDate"
-                    value={formData.expiryDate}
-                    onChange={handleChange}
-                    placeholder="MM/YY"
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label>CVV *</label>
-                  <input
-                    type="text"
-                    name="cvv"
-                    value={formData.cvv}
-                    onChange={handleChange}
-                    placeholder="123"
-                    required
-                  />
-                </div>
+              <div className="payment-info">
+                <p>💳 Demo Mode - Fake Payment System</p>
+                <p>This is a demonstration. No real charges will be made.</p>
               </div>
             </fieldset>
 
